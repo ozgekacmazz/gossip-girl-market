@@ -1,22 +1,22 @@
 from datetime import datetime, timedelta
 
 # Ürün stokları ve satışları takip etmek için sözlükler
-products = {}
-sales = []
+urunler = {}
+satislar = []
 
 def add_product(name, stock, price):
-    products[name] = {"stock": stock, "price": price}
+    urunler[name] = {"stock": stock, "price": price}
 
 def update_stock(name, quantity):
-    if name in products:
-        products[name]["stock"] += quantity
+    if name in urunler:
+        urunler[name]["stock"] += quantity
     else:
         print("Ürün bulunamadı.")
 
 def record_sale(name, quantity):
-    if name in products and products[name]["stock"] >= quantity:
-        products[name]["stock"] -= quantity
-        sales.append({"name": name, "quantity": quantity, "date": datetime.now().strftime("%Y-%m-%d")})
+    if name in urunler and urunler[name]["stock"] >= quantity:
+        urunler[name]["stock"] -= quantity
+        satislar.append({"name": name, "quantity": quantity, "date": datetime.now().strftime("%Y-%m-%d")})
         print(f"{quantity} adet {name} satıldı.")
     else:
         print("Yetersiz stok veya ürün bulunamadı.")
@@ -24,7 +24,7 @@ def record_sale(name, quantity):
 def daily_sales_report():
     today = datetime.now().strftime("%Y-%m-%d")
     report = {}
-    for sale in sales:
+    for sale in satislar:
         if sale["date"] == today:
             report[sale["name"]] = report.get(sale["name"], 0) + sale["quantity"]
     print("Günlük Satış Raporu:")
@@ -34,7 +34,7 @@ def daily_sales_report():
 def weekly_sales_report():
     week_ago = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
     report = {}
-    for sale in sales:
+    for sale in satislar:
         if sale["date"] >= week_ago:
             report[sale["name"]] = report.get(sale["name"], 0) + sale["quantity"]
     print("Haftalık Satış Raporu:")
