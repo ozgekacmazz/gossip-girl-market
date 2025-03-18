@@ -1,4 +1,4 @@
-Zeynep Ayça Akbayır
-Asya Safidemir
-Sena Nur Çelik
+Zeynep Ayça Akbayır-
+Asya Safidemir-
+Sena Nur Çelik-
 Özge Kaçmaz
