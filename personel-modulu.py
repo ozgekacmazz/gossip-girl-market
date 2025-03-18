@@ -1,32 +1,73 @@
-class SupportTicket:
-    def __init__(self, ticket_id, customer_name, issue):
-        self.ticket_id = ticket_id
-        self.customer_name = customer_name
-        self.issue = issue
-        self.status = "Açık"  # "Çözüldü" durumu da olabilir
-
-    def close_ticket(self):
-        self.status = "Çözüldü"
-
-    def __str__(self):
-        return f"#{self.ticket_id} - {self.customer_name}: {self.issue} [{self.status}]"
-
-class CustomerSupportModule:
+class MusteriDestek:
     def __init__(self):
-        self.tickets = []
+        self.sikayetler = []
+    
+    def sikayet_ekle(self, sikayet):
+        self.sikayetler.append(sikayet)
+    
+    def listele(self):
+        return self.sikayetler
 
-    def create_ticket(self, ticket_id, customer_name, issue):
-        self.tickets.append(SupportTicket(ticket_id, customer_name, issue))
 
-    def list_tickets(self):
-        for ticket in self.tickets:
-            print(ticket)
+class ReyonBakimi:
+    def __init__(self):
+        self.kontrol_listesi = []
+    
+    def ekle(self, urun):
+        self.kontrol_listesi.append(urun)
+    
+    def listele(self):
+        return self.kontrol_listesi
 
-    def resolve_ticket(self, ticket_id):
-        for ticket in self.tickets:
-            if ticket.ticket_id == ticket_id:
-                ticket.close_ticket()
-                print(f"Ticket #{ticket_id} çözüldü.")
-                return
-        print("Ticket bulunamadı.")
+
+class StokIslemleri:
+    def __init__(self):
+        self.stok = {}
+    
+    def ekle(self, urun, miktar):
+        self.stok[urun] = self.stok.get(urun, 0) + miktar
+    
+    def cikar(self, urun, miktar):
+        if urun in self.stok and self.stok[urun] >= miktar:
+            self.stok[urun] -= miktar
+        else:
+            print("Yetersiz stok!")
+    
+    def listele(self):
+        return self.stok
+
+
+class NobetCizelgesi:
+    def __init__(self):
+        self.nobet_listesi = {}
+    
+    def ekle(self, personel, tarih):
+        self.nobet_listesi[tarih] = personel
+    
+    def listele(self):
+        return self.nobet_listesi
+
+
+class Izinler:
+    def __init__(self):
+        self.izin_listesi = {}
+    
+    def izin_ekle(self, personel, tarih):
+        self.izin_listesi[tarih] = personel
+    
+    def listele(self):
+        return self.izin_listesi
+
+
+class MaasTablosu:
+    def __init__(self):
+        self.maaslar = {}
+    
+    def ekle(self, personel, maas):
+        self.maaslar[personel] = maas
+    
+    def listele(self):
+        return self.maaslar
+
+
 
